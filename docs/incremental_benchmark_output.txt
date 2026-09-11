@@ -1,0 +1,4 @@
+full rebuild (all 24 months): 6.124s
+incremental refresh (month 23 only): 0.597s
+speedup: 10.26x
+fact_order_line_gold row count after incremental refresh: 1200000

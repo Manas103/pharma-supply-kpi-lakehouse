@@ -1,0 +1,35 @@
+=== pharma-supply-kpi-lakehouse pipeline run ===
+target order lines: 1200000
+raw source raw_customers: 260 rows -> /tmp/kpilake_data/raw/raw_customers.parquet
+raw source raw_batches: 30000 rows -> /tmp/kpilake_data/raw/raw_batches.parquet
+raw source raw_orders: 1200000 rows -> /tmp/kpilake_data/raw/raw_orders.parquet
+raw source raw_shipments: 1200000 rows -> /tmp/kpilake_data/raw/raw_shipments.parquet
+raw source raw_order_batch_link: 1200000 rows -> /tmp/kpilake_data/raw/raw_order_batch_link.parquet
+simulation wall time: 2.42s
+bronze ingest wall time: 7.43s
+bronze.raw_customers: 260 rows
+bronze.raw_batches: 30000 rows
+bronze.raw_orders: 1200000 rows
+bronze.raw_shipments: 1200000 rows
+bronze.raw_order_batch_link: 1200000 rows
+silver build wall time: 7.81s
+silver.fact_order_line_silver: 1200000 rows (raw had 1200000)
+silver.fact_batch_silver: 30000 rows (raw had 30000)
+referential-integrity drop: 0 order lines dropped
+gold build wall time: 2.38s
+
+=== 9 conformed KPI measures (gold layer, PySpark) ===
+otif_pct: 74.82466666666666
+order_fill_rate_pct: 96.86502682460177
+on_time_delivery_pct: 78.52566666666667
+in_full_delivery_pct: 93.69766666666666
+backorder_rate_pct: 1.4455833333333332
+n_order_lines: 1200000
+rft_pct: 86.47
+batch_mfg_cycle_days: 12.48108322318043
+batch_release_cycle_days: 5.919220172649968
+deviation_rate_per_100_batches: 13.530000000000001
+n_batches: 30000
+
+measures by plant written to powerbi/measures_by_plant_order_line.csv and measures_by_plant_batch.csv
+dim_plant.csv, dim_product.csv, dim_business_unit.csv, fact_gold_sample.csv written to powerbi/

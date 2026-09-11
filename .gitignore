@@ -1,0 +1,22 @@
+# Python
+__pycache__/
+*.pyc
+.pytest_cache/
+venv/
+.venv/
+.venv-wsl/
+
+# Spark
+spark-warehouse/
+metastore_db/
+derby.log
+
+# Regenerable data: nothing under data/ is tracked. Rebuild the full
+# 1.2M-order-line bronze/silver/gold lakehouse with
+# `python scripts/run_pipeline.py`.
+data/
+*.parquet
+
+# Editors
+.vscode/
+.idea/

@@ -1,0 +1,60 @@
+// 9 conformed KPI measures, each written once against the gold star schema
+// (fact_order_line_gold, fact_batch_gold) and reused, unchanged, across all
+// 6 report pages named in report_pages.md. Definitions match
+// kpilake/measures.py and kpilake/gold.py exactly; see star_schema.md for
+// column provenance. Power BI Desktop is not installed on the build
+// machine (README, "Honest framing"), so these measures are documented
+// here and cross-checked against the identical PySpark and DuckDB-SQL
+// implementations (kpilake/measures.py, oracle/recompute_measures.py)
+// rather than compiled inside a live .pbix.
+
+OTIF % =
+DIVIDE(
+    CALCULATE(COUNTROWS(fact_order_line_gold), fact_order_line_gold[otif] = TRUE()),
+    COUNTROWS(fact_order_line_gold)
+) * 100
+
+Right-First-Time % =
+DIVIDE(
+    CALCULATE(COUNTROWS(fact_batch_gold), fact_batch_gold[right_first_time] = TRUE()),
+    COUNTROWS(fact_batch_gold)
+) * 100
+
+Avg Batch Manufacturing Cycle Time (days) =
+AVERAGE(fact_batch_gold[batch_mfg_cycle_days])
+
+Avg Batch Release Cycle Time (days) =
+AVERAGE(fact_batch_gold[batch_release_cycle_days])
+
+Order Fill Rate % =
+DIVIDE(SUM(fact_order_line_gold[qty_shipped]), SUM(fact_order_line_gold[qty_ordered])) * 100
+
+On-Time Delivery % =
+DIVIDE(
+    CALCULATE(COUNTROWS(fact_order_line_gold), fact_order_line_gold[on_time_delivery] = TRUE()),
+    COUNTROWS(fact_order_line_gold)
+) * 100
+
+In-Full Delivery % =
+DIVIDE(
+    CALCULATE(COUNTROWS(fact_order_line_gold), fact_order_line_gold[in_full_delivery] = TRUE()),
+    COUNTROWS(fact_order_line_gold)
+) * 100
+
+Deviation Rate (per 100 batches) =
+DIVIDE(
+    CALCULATE(COUNTROWS(fact_batch_gold), fact_batch_gold[deviation_flag] = TRUE()),
+    COUNTROWS(fact_batch_gold)
+) * 100
+
+Backorder Rate % =
+DIVIDE(
+    CALCULATE(COUNTROWS(fact_order_line_gold), fact_order_line_gold[backorder] = TRUE()),
+    COUNTROWS(fact_order_line_gold)
+) * 100
+
+// Row-level security role filter (documented in rls.md, emulated and unit
+// tested in kpilake/rls.py since there is no live Power BI Desktop on this
+// machine to assign roles inside):
+// Role filter on fact_order_line_gold:
+//   [business_unit] = LOOKUPVALUE(UserBUMapping[BusinessUnit], UserBUMapping[UserPrincipalName], USERPRINCIPALNAME())

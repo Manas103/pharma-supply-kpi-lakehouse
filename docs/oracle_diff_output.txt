@@ -1,0 +1,14 @@
+=== oracle diff: gold (PySpark) vs independent oracle (DuckDB SQL) ===
+otif_pct: gold=74.82466666666666 oracle=74.82466666666666 abs_diff=0.00e+00 exact=True
+rft_pct: gold=86.47 oracle=86.47 abs_diff=0.00e+00 exact=True
+batch_mfg_cycle_days: gold=12.48108322318043 oracle=12.48108322318045 abs_diff=1.95e-14 exact=True
+batch_release_cycle_days: gold=5.919220172649968 oracle=5.919220172649938 abs_diff=3.02e-14 exact=True
+order_fill_rate_pct: gold=96.86502682460177 oracle=96.86502682460177 abs_diff=0.00e+00 exact=True
+on_time_delivery_pct: gold=78.52566666666667 oracle=78.52566666666667 abs_diff=0.00e+00 exact=True
+in_full_delivery_pct: gold=93.69766666666666 oracle=93.69766666666666 abs_diff=0.00e+00 exact=True
+deviation_rate_per_100_batches: gold=13.530000000000001 oracle=13.530000000000001 abs_diff=0.00e+00 exact=True
+backorder_rate_pct: gold=1.4455833333333332 oracle=1.4455833333333332 abs_diff=0.00e+00 exact=True
+n_order_lines gold=1200000 oracle=1200000
+n_batches gold=30000 oracle=30000
+max abs diff across all 9 measures: 3.02e-14
+all 9 measures diffed exact: True
