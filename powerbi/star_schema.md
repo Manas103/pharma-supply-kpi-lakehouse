@@ -24,11 +24,11 @@ are not tracked in this repository (`.gitignore`).
 
 ## Dimensions
 
-- `dim_plant` (`plant_id`, `name`, `region`) — 3 rows.
-- `dim_product` (`product_id`, `family`, `base_unit`, `batch_yield_units`) — 6 rows.
-- `dim_customer` (`customer_id`, `region`, `business_unit`) — 260 rows.
-- `dim_business_unit` (`business_unit`) — 3 rows, the row-level-security dimension (`rls.md`).
-- `dim_date` (`day_index`, `month_index`) — one row per simulated day across the 24-month horizon.
+- `dim_plant` (`plant_id`, `name`, `region`), 3 rows.
+- `dim_product` (`product_id`, `family`, `base_unit`, `batch_yield_units`), 6 rows.
+- `dim_customer` (`customer_id`, `region`, `business_unit`), 260 rows.
+- `dim_business_unit` (`business_unit`), 3 rows, the row-level-security dimension (`rls.md`).
+- `dim_date` (`day_index`, `month_index`), one row per simulated day across the 24-month horizon.
 
 ## Relationships
 
